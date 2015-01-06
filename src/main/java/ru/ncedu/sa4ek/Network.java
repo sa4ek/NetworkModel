@@ -57,15 +57,15 @@ public class Network {
         cables[5].connection(switch1, pc3);
 
         //add devices to network
-        pathElements.put(1, router);
-        pathElements.put(2, hub);
-        pathElements.put(3, switch1);
-        pathElements.put(4, pc1);
-        pathElements.put(5, pc2);
-        pathElements.put(6, pc3);
-        pathElements.put(7, firewall);
+        pathElements.put(router.getId(), router);
+        pathElements.put(hub.getId(), hub);
+        pathElements.put(switch1.getId(), switch1);
+        pathElements.put(pc1.getId(), pc1);
+        pathElements.put(pc2.getId(), pc2);
+        pathElements.put(pc3.getId(), pc3);
+        pathElements.put(firewall.getId(), firewall);
         for(int i = 8; i < 14; i++){
-            pathElements.put(i, cables[i-8]);
+            pathElements.put(cables[i - 8].getId(), cables[i-8]);
         }
 
     }

@@ -48,4 +48,8 @@ public abstract class PathElement {
         }
         connections.add(element);
     }
+
+    public int compareTo(PathElement other){
+        return Double.compare(this.getTimeDelay(), other.getTimeDelay());
+    }
 }

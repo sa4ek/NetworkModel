@@ -19,11 +19,13 @@ public class Hub extends PassiveElement {
         if (connections == null) {
             connections = new ArrayList<PathElement>(CONNECTIONS);
             connections.add(p);
+            p.addElement(this);
         } else {
             if (connections.size() == CONNECTIONS) {
                 System.out.println("All ports busy. Hub with id = " + getId());
             } else {
                 connections.add(p);
+                p.addElement(this);
                 System.out.println("Connection is successful");
             }
         }

@@ -18,13 +18,7 @@ public class RouteProviderImpl implements RouteProvider {
     public RouteProviderImpl(String description) {
         this.description = description;
     }
-/*
-    public static List<PathElement> getRoute(Integer firstId, Integer secondId, Network net) {
-        List<PathElement> pathElements = new ArrayList<PathElement>();
 
-
-    }
-    */
     public  static List<PathElement> getList(PathElement p1, PathElement p2){
         try {
             List<PathElement> pathElements = new ArrayList<PathElement>();
@@ -53,13 +47,7 @@ public class RouteProviderImpl implements RouteProvider {
 
     public static void main(String[] args) throws RouteNotFoundException {
 
-        //List<PathElement> list = getRoute(0, 1, new Network());
-        Network net = new Network();
-        PathElement p1 = net.getPathElements().get(1);
-        PathElement p2 = net.getPathElements().get(6);
-        for(PathElement e: getList(p1, p2)){
-            System.out.println(e.toString());
-        }
+
     }
 /*
     // @Override
