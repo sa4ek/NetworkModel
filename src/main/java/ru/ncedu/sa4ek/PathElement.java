@@ -6,12 +6,15 @@ import java.util.Collection;
 /**
  * Created by sa4ek on 25.12.14.
  */
-public abstract class PathElement {
+public abstract class PathElement implements Comparable<PathElement> {
     private Integer id = 0;
     private double timeDelay;
     private double cost;
     private String info;
     protected Collection<PathElement> connections;
+    public PathElement previous;
+    public double minDistance = Double.POSITIVE_INFINITY;
+
 
 
     public PathElement(double timeDelay, double cost, String info, Integer id){

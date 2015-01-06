@@ -25,9 +25,11 @@ public class Hub extends PassiveElement {
                 System.out.println("All ports busy. Hub with id = " + getId());
             } else {
                 connections.add(p);
-                p.addElement(this);
+                if(!(p instanceof Cable ))
+                    p.addElement(this);
                 System.out.println("Connection is successful");
             }
         }
     }
+
 }

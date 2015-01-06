@@ -21,7 +21,7 @@ public class ActiveElement extends PathElement {
     }
 
     public String toString(){
-        return "id: " + this.getId() + "info: " + this.getInfo() + " time_delay: " + this.getTimeDelay() + " cost: " +
+        return " | id: " + this.getId() + " info: " + this.getInfo() + " time_delay: " + this.getTimeDelay() + " cost: " +
                 this.getCosts() + " ip: " + this.getIP();
     }
 }

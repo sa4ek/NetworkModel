@@ -45,28 +45,6 @@ public class RouteProviderImpl implements RouteProvider {
         return pathElements;
     }
 
-    public static void main(String[] args) throws RouteNotFoundException {
-
-
-    }
-/*
-    // @Override
-    public static List<PathElement> getRoute(String ip1, String ip2, Network net) throws RouteNotFoundException {
-        ArrayList<PathElement> elements = new ArrayList<PathElement>();
-        Network network = new Network();
-        HashMap map = network.getPathElements();
-        Iterator itr = map.entrySet().iterator();
-        while (itr.hasNext()) {
-            Map.Entry entry = (Map.Entry) itr.next();
-            System.out.println(entry.getValue());
-        }
-        IPAddress ipAddress_1 = new IPAddress(ip1);
-        IPAddress ipAddress_2 = new IPAddress(ip2);
-
-
-        return elements;
-    }
-*/
     @Override
     public String getDescription() {
         return description;

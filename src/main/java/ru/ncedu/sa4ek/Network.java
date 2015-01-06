@@ -7,8 +7,9 @@ import ru.ncedu.sa4ek.path_elements.active_elements.Switch;
 import ru.ncedu.sa4ek.path_elements.passive_elements.Cable;
 import ru.ncedu.sa4ek.path_elements.passive_elements.Hub;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.Map.*;
+
 
 /**
  * Created by sa4ek on 25.12.14.
@@ -21,7 +22,7 @@ public class Network {
         Router router = new Router(0,8,"router", 0, "192.168.0.0");
 
         //create 1 HUB
-        Hub hub = new Hub(100,0.5,"pc1", 1);
+        Hub hub = new Hub(100,0.5,"hub", 1);
 
         //create 1 switch
         Switch switch1 = new Switch(200,5,"switch", 2, "192.168.0.1");
@@ -29,12 +30,13 @@ public class Network {
         //create 3 PC
         PC pc1 = new PC(100,0.5,"pc1", 3, "192.168.0.1");
         PC pc2 = new PC(100,0.5,"pc2", 4, "192.168.0.1");
-        pc2.setSecondIP("192.168.1.0");
+        //pc2.setSecondIP("192.168.1.0");
         PC pc3 = new PC(100,0.5,"pc3", 5, "192.168.1.1");
 
         //create 1 firewall
         Firewall firewall = new Firewall(300,0.5,"firewall", 6, switch1.getIP());
-
+        firewall.addElement(switch1);
+        switch1.addElement(firewall);
         //create 10 cables
         Cable[] cables = new Cable[6];
         for(int i = 0; i < 6; i++){
@@ -42,12 +44,6 @@ public class Network {
         }
 
         //connect Path Elements
-        hub.addElement(pc1);
-        hub.addElement(pc2);
-        hub.addElement(switch1);
-
-        switch1.addElement(pc2);
-        switch1.addElement(pc3);
 
         cables[0].connection(router, hub);
         cables[1].connection(hub, pc1);
@@ -55,6 +51,9 @@ public class Network {
         cables[3].connection(hub, switch1);
         cables[4].connection(switch1, pc2);
         cables[5].connection(switch1, pc3);
+
+      /*  Cable cable = new Cable(50,0.1,"cable_rout_pc2", 13);
+        cable.connection(router, pc2);*/
 
         //add devices to network
         pathElements.put(router.getId(), router);
@@ -72,5 +71,20 @@ public class Network {
 
     public HashMap<Integer, PathElement> getPathElements(){
         return (HashMap)pathElements;
+    }
+
+    public static void main(String[] args) {
+        Network net = new Network();
+        DejkstraPathElement.computePaths(net.getPathElements().get(0));
+        System.out.println(DejkstraPathElement.getShortestPathTo(net.getPathElements().get(6)));
+
+        for(Entry e: net.getPathElements().entrySet()){
+            System.out.println("********************************************************************");
+            System.out.println((PathElement)e.getValue());
+            System.out.println(((PathElement)e.getValue()).getConnections());
+            System.out.println();
+            System.out.println();
+        }
+
     }
 }
