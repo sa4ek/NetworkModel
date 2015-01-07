@@ -1,7 +1,5 @@
 package ru.ncedu.sa4ek;
 
-import ru.ncedu.sa4ek.Dijkstra.Edge;
-import ru.ncedu.sa4ek.Dijkstra.Vertex;
 
 import java.util.ArrayList;
 import java.util.Collections;

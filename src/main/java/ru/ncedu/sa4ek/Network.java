@@ -28,10 +28,10 @@ public class Network {
         Switch switch1 = new Switch(200,5,"switch", 2, "192.168.0.1");
 
         //create 3 PC
-        PC pc1 = new PC(100,0.5,"pc1", 3, "192.168.0.1");
-        PC pc2 = new PC(100,0.5,"pc2", 4, "192.168.0.1");
+        PC pc1 = new PC(100,0.5,"pc1", 3, "192.168.0.2");
+        PC pc2 = new PC(100,0.5,"pc2", 4, "192.168.0.3");
         //pc2.setSecondIP("192.168.1.0");
-        PC pc3 = new PC(100,0.5,"pc3", 5, "192.168.1.1");
+        PC pc3 = new PC(100,0.5,"pc3", 5, "192.168.0.4");
 
         //create 1 firewall
         Firewall firewall = new Firewall(300,0.5,"firewall", 6, switch1.getIP());
@@ -73,18 +73,10 @@ public class Network {
         return (HashMap)pathElements;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RouteNotFoundException {
         Network net = new Network();
-        DejkstraPathElement.computePaths(net.getPathElements().get(0));
-        System.out.println(DejkstraPathElement.getShortestPathTo(net.getPathElements().get(6)));
-
-        for(Entry e: net.getPathElements().entrySet()){
-            System.out.println("********************************************************************");
-            System.out.println((PathElement)e.getValue());
-            System.out.println(((PathElement)e.getValue()).getConnections());
-            System.out.println();
-            System.out.println();
-        }
+        RouteProviderImpl routeProvider = new RouteProviderImpl();
+        System.out.println(routeProvider.getRoute("192.168.0.0", "192.168.0.4", net));
 
     }
 }

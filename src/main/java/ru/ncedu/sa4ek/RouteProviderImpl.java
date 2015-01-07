@@ -1,6 +1,9 @@
 package ru.ncedu.sa4ek;
 
 
+import ru.ncedu.sa4ek.path_elements.ActiveElement;
+import ru.ncedu.sa4ek.path_elements.active_elements.IPAddress;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,36 +18,35 @@ import java.util.Map.*;
 public class RouteProviderImpl implements RouteProvider {
     String description;
 
-    public RouteProviderImpl(String description) {
-        this.description = description;
+    @Override
+    public List<PathElement> getRoute(Integer firstId, Integer secondId, Network net) throws RouteNotFoundException {
+        HashMap<Integer, PathElement> elements = net.getPathElements();
+        DejkstraPathElement.computePaths(elements.get(firstId));
+        return DejkstraPathElement.getShortestPathTo(elements.get(secondId));
     }
-
-    public  static List<PathElement> getList(PathElement p1, PathElement p2){
-        try {
-            List<PathElement> pathElements = new ArrayList<PathElement>();
-            if (p1.getConnections().contains(p2)) {
-                pathElements.add(p1);
-                return pathElements;
+/*
+    @Override
+    public List<PathElement> getRoute(String ip1, String ip2, Network net) throws RouteNotFoundException {
+        PathElement p1 = null, p2 = null;
+        for (Entry entry : net.getPathElements().entrySet()) {
+            if (entry instanceof ActiveElement) {
+                if (((ActiveElement) entry).getIP().equals(ip1)) {
+                    p1 = (PathElement) entry;
+                }
+                if (((ActiveElement) entry).getIP().equals(ip2)) {
+                    p2 = (PathElement) entry;
+                }
             }
-            for (PathElement p : p1.getConnections()) {
-                getList(p, p2);
-            }
-            if(pathElements.isEmpty()) throw  new RouteNotFoundException();
-        } catch (RouteNotFoundException e){
+        }
+        if((p1.equals(null)) || (p2.equals(null)))
+        {
+            System.out.println("Devices with this ip not found!");
             return null;
         }
-
-        return null;
+            DejkstraPathElement.computePaths(p1);
+            return DejkstraPathElement.getShortestPathTo(p2);
     }
-
-    private static ArrayList<PathElement> getElements(HashMap<Integer, PathElement> elementHashMap) {
-        ArrayList<PathElement> pathElements = new ArrayList<PathElement>();
-        for(Entry entry: elementHashMap.entrySet()){
-            pathElements.add((PathElement) entry.getValue());
-        }
-        return pathElements;
-    }
-
+*/
     @Override
     public String getDescription() {
         return description;

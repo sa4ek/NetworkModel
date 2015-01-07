@@ -20,9 +20,9 @@ public class Cable extends PassiveElement {
         connections = new ArrayList<PathElement>(CONNECTIONS);
         connections.add(p1);
         connections.add(p2);
-//        if(!(p1 instanceof Hub ))
+        //if((p1.getConnections().contains(this)))
             p1.addElement(this);
-       // if(!(p2 instanceof Hub ))
+        //if((p2.getConnections().contains(this)))
             p2.addElement(this);
         return connections;
     }
